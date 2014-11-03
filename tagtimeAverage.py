@@ -31,15 +31,19 @@ log = ""
 
 for filename in globby:
 	file = open(filename,'r')
+	file = open(filename,'r')
 	log += file.read()
 	file.close()
 
 # location = 0
 loglist = []
+log.replace("/n","")
+log.replace("/r","")
 temp = log.rsplit("]")
+
 for ping in temp:
 	try:
-		pingstamp = int(ping[1:11])
+		pingstamp = int(ping[0:11])
 	except:
 		continue
 	# pingday = ping[ping.find('  [')+8:ping.find('  [')+13]
@@ -55,8 +59,7 @@ for ping in temp:
 
 by_day_array = np.array(loglist)
 datapoints = []
-print np.max(by_day_array[:,0])
-# print by_day_array[:,1]
+
 for day in np.arange(np.min(by_day_array[:,0]),np.max(by_day_array[:,0])+1):
 	daystract = np.logical_and(np.equal(by_day_array[:,0],day*np.ones_like(by_day_array[:,0])), elementwise_number(by_day_array[:,0]))
 	temp = np.compress(daystract,by_day_array,0)
@@ -66,14 +69,14 @@ for day in np.arange(np.min(by_day_array[:,0]),np.max(by_day_array[:,0])+1):
 	datapoints.append([time.strftime("%m.%d",time.localtime(np.min(temp[:,2]))), time.struct_time(time.localtime(np.min(temp[:,2])))[7],np.mean(temp[:,1]), np.mean(temp[:,1])-np.percentile(temp[:,1],25),np.percentile(temp[:,1],75)-np.mean(temp[:,1]), np.count_nonzero(temp[:,2])])
 
 for data in datapoints:
-	print "%s Average: %s (IQR: %s-%s)" % (data[0], data[2], data[2]-data[3],data[2]+data[4])
+	pass#	print "%s Average: %s (IQR: %s-%s)" % (data[0], data[2], data[2]-data[3],data[2]+data[4])
 
 import matplotlib.pyplot as plt
 
 
 datapoints = np.array(datapoints)
 xlabels = datapoints[:,0]
-print datapoints
+# debug print datapoints
 datapoints = datapoints.astype(np.float)
 
 plt.figure()
@@ -95,7 +98,7 @@ plt.show()
 		 # else:
 		 	 # temp.append(tag)
 	 # try:
-		 # dictionary[datum[0]] = [dictionary[datum[0]][0]+digitag,int(dictionary[datum[0]][1])+1,dictionary[datum[0]][2] + temp,dictionary[datum[0]][3] + [datum[2]]]
+		 # dictionary[datum[0]] = s[dictionary[datum[0]][0]+digitag,int(dictionary[datum[0]][1])+1,dictionary[datum[0]][2] + temp,dictionary[datum[0]][3] + [datum[2]]]
 		 # # print dictionary[datum[0]][2]
 		 # # print dictionary
 	 # except:
