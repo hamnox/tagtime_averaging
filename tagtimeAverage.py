@@ -69,7 +69,7 @@ for day in np.arange(np.min(by_day_array[:,0]),np.max(by_day_array[:,0])+1):
 	datapoints.append([time.strftime("%m.%d",time.localtime(np.min(temp[:,2]))), time.struct_time(time.localtime(np.min(temp[:,2])))[7],np.mean(temp[:,1]), np.mean(temp[:,1])-np.percentile(temp[:,1],25),np.percentile(temp[:,1],75)-np.mean(temp[:,1]), np.count_nonzero(temp[:,2])])
 
 for data in datapoints:
-	pass#	print "%s Average: %s (IQR: %s-%s)" % (data[0], data[2], data[2]-data[3],data[2]+data[4])
+	print "%s Average: %s (IQR: %s-%s)" % (data[0], data[2], data[2]-data[3],data[2]+data[4])
 
 import matplotlib.pyplot as plt
 
