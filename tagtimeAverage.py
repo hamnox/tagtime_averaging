@@ -81,8 +81,8 @@ datapoints = datapoints.astype(np.float)
 
 plt.figure()
 
-plt.plot(datapoints[:,1], datapoints[:,2], 'b-')
-plt.errorbar(datapoints[:,1], datapoints[:,2],yerr=(datapoints[:,3],datapoints[:,4]))
+plt.plot(datapoints[:,1], datapoints[:,2], 'b-',datapoints[:,1],datapoints[:,2]-datapoints[:,3],'r-',datapoints[:,1],datapoints[:,4]+datapoints[:,2],'g-')
+#plt.errorbar(datapoints[:,1], datapoints[:,2],yerr=(datapoints[:,3],datapoints[:,4]))
 plt.ylim((0,10))
 plt.xlim((np.min(datapoints[:,1])-1,np.max(datapoints[:,1])+1))
 plt.xticks(datapoints[:,1], xlabels)
